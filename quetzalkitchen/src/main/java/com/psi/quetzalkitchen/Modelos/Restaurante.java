@@ -12,12 +12,15 @@ public class Restaurante {
 
     private String nombre;
     private boolean empresaEnvioPropia;
+    private Direccion direccion;
 
     public Restaurante() {
     }
 
-    public Restaurante(String nombre, boolean empresaEnvioPropia) {
+    public Restaurante(String nombre, boolean empresaEnvioPropia, Direccion direccion) {
         this.nombre = nombre;
+        this.empresaEnvioPropia = empresaEnvioPropia;
+        this.direccion = direccion;
     }
 
     public String getNombre() {
@@ -32,14 +35,22 @@ public class Restaurante {
         return empresaEnvioPropia;
     }
 
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
     public void setEmpresaEnvioPropia(boolean empresaEnvioPropia) {
         this.empresaEnvioPropia = empresaEnvioPropia;
     }
 
     @Override
     public String toString() {
-        return "Restaurante{" + "nombre=" + nombre + ", empresaEnvioPropia=" + empresaEnvioPropia + '}';
+        return "Restaurante{" + "nombre=" + nombre + ", empresaEnvioPropia=" + empresaEnvioPropia + ", direccion=" + direccion + '}';
     }
 
-
+  
 }

@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Pedido {
     
-    private int referencia;
+    private String referencia;
     private ArrayList<PlatoEnPedido> platos;
     private double precioSinDescuento;
     private double precioConDescuento;
@@ -24,7 +24,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int referencia, ArrayList<PlatoEnPedido> platos, double precioSinDescuento, double precioConDescuento, Date horaEstimada, Direccion direccion, Descuento descuento) {
+    public Pedido(String referencia, ArrayList<PlatoEnPedido> platos, double precioSinDescuento, double precioConDescuento, Date horaEstimada, Direccion direccion, Descuento descuento) {
         this.referencia = referencia;
         this.platos = platos;
         this.precioSinDescuento = precioSinDescuento;
@@ -34,11 +34,11 @@ public class Pedido {
         this.descuento = descuento;
     }    
 
-    public int getReferencia() {
+    public String getReferencia() {
         return referencia;
     }
 
-    public void setReferencia(int referencia) {
+    public void setReferencia(String referencia) {
         this.referencia = referencia;
     }
 
