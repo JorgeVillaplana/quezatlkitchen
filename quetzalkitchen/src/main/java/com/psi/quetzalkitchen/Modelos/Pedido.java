@@ -13,8 +13,9 @@ import java.util.Date;
  */
 public class Pedido {
     
-    private ArrayList<ArticuloEnPedido> articulos;
-    private double total;
+    private String referencia;
+    private ArrayList<PlatoEnPedido> platos;
+    private double precioTotal;
     private Date horaEstimada;
     private String localidad;
     private String direccion;
@@ -23,29 +24,38 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(ArrayList<ArticuloEnPedido> articulos, double total, Date horaEstimada, String localidad, String direccion, int codPostal) {
-        this.articulos = articulos;
-        this.total = total;
+    public Pedido(String referencia, ArrayList<PlatoEnPedido> articulos, double total, Date horaEstimada, String localidad, String direccion, int codPostal) {
+        this.referencia = referencia;
+        this.platos = articulos;
+        this.precioTotal = total;
         this.horaEstimada = horaEstimada;
         this.localidad = localidad;
         this.direccion = direccion;
         this.codPostal = codPostal;
     }
 
-    public ArrayList<ArticuloEnPedido> getArticulos() {
-        return articulos;
+    public String getReferencia() {
+        return referencia;
     }
 
-    public void setArticulos(ArrayList<ArticuloEnPedido> articulos) {
-        this.articulos = articulos;
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 
-    public double getTotal() {
-        return total;
+    public ArrayList<PlatoEnPedido> getPlatos() {
+        return platos;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setPlatos(ArrayList<PlatoEnPedido> platos) {
+        this.platos = platos;
+    }
+
+    public double getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public void setPrecioTotal(double precioTotal) {
+        this.precioTotal = precioTotal;
     }
 
     public Date getHoraEstimada() {
@@ -82,7 +92,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "articulos=" + articulos + ", total=" + total + ", horaEstimada=" + horaEstimada + ", localidad=" + localidad + ", direccion=" + direccion + ", codPostal=" + codPostal + '}';
+        return "Pedido{" + "referencia=" + referencia + "platos=" + platos + ", total=" + precioTotal + ", horaEstimada=" + horaEstimada + ", localidad=" + localidad + ", direccion=" + direccion + ", codPostal=" + codPostal + '}';
     }
     
     

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Mañanas
  */
-class Articulo {
+class Plato {
     
     private String nombre;
     private String referencia;
@@ -18,10 +18,10 @@ class Articulo {
     private Restaurante restaurante;
     private ArrayList<Alergeno> alergenos;
 
-    public Articulo() {
+    public Plato() {
     }
 
-    public Articulo(String nombre, String referencia, double precioUnitario, Restaurante restaurante, ArrayList<Alergeno> alergenos) {
+    public Plato(String nombre, String referencia, double precioUnitario, Restaurante restaurante, ArrayList<Alergeno> alergenos) {
         this.nombre = nombre;
         this.referencia = referencia;
         this.precioUnitario = precioUnitario;
