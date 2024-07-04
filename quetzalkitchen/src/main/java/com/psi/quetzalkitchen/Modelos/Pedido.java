@@ -20,21 +20,23 @@ public class Pedido {
     private String localidad;
     private String direccion;
     private int codPostal;
+    private Descuento descuento;
 
     public Pedido() {
     }
 
-    public Pedido(int referencia, ArrayList<PlatoEnPedido> articulos, double total, Date horaEstimada, String localidad, String direccion, int codPostal) {
-        
+    public Pedido(int referencia, ArrayList<PlatoEnPedido> platos, double precioTotal, Date horaEstimada, String localidad, String direccion, int codPostal, Descuento descuento) {
         this.referencia = referencia;
-        this.platos = articulos;
-        this.precioTotal = total;
+        this.platos = platos;
+        this.precioTotal = precioTotal;
         this.horaEstimada = horaEstimada;
         this.localidad = localidad;
         this.direccion = direccion;
         this.codPostal = codPostal;
-        
+        this.descuento = descuento;
     }
+
+    
 
     public int getReferencia() {
         return referencia;
@@ -92,10 +94,20 @@ public class Pedido {
         this.codPostal = codPostal;
     }
 
+    public Descuento getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Descuento descuento) {
+        this.descuento = descuento;
+    }
+
     @Override
     public String toString() {
-        return "Pedido{" + "referencia=" + referencia + ", platos=" + platos + ", total=" + precioTotal + ", horaEstimada=" + horaEstimada + ", localidad=" + localidad + ", direccion=" + direccion + ", codPostal=" + codPostal + '}';
+        return "Pedido{" + "referencia=" + referencia + ", platos=" + platos + ", precioTotal=" + precioTotal + ", horaEstimada=" + horaEstimada + ", localidad=" + localidad + ", direccion=" + direccion + ", codPostal=" + codPostal + ", descuento=" + descuento + '}';
     }
+
+    
     
     
     
