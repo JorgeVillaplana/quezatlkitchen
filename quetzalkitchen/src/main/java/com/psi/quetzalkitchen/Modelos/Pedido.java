@@ -15,7 +15,8 @@ public class Pedido {
     
     private int referencia;
     private ArrayList<PlatoEnPedido> platos;
-    private double precioTotal;
+    private double precioSinDescuento;
+    private double precioConDescuento;
     private Date horaEstimada;
     private String localidad;
     private String direccion;
@@ -25,10 +26,11 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(int referencia, ArrayList<PlatoEnPedido> platos, double precioTotal, Date horaEstimada, String localidad, String direccion, int codPostal, Descuento descuento) {
+    public Pedido(int referencia, ArrayList<PlatoEnPedido> platos, double precioSinDescuento, double precioConDescuento, Date horaEstimada, String localidad, String direccion, int codPostal, Descuento descuento) {
         this.referencia = referencia;
         this.platos = platos;
-        this.precioTotal = precioTotal;
+        this.precioSinDescuento = precioSinDescuento;
+        this.precioConDescuento = precioConDescuento;
         this.horaEstimada = horaEstimada;
         this.localidad = localidad;
         this.direccion = direccion;
@@ -54,12 +56,20 @@ public class Pedido {
         this.platos = platos;
     }
 
-    public double getPrecioTotal() {
-        return precioTotal;
+    public double getPrecioSinDescuento() {
+        return precioSinDescuento;
     }
 
-    public void setPrecioTotal(double precioTotal) {
-        this.precioTotal = precioTotal;
+    public void setPrecioSinDescuento(double precioSinDescuento) {
+        this.precioSinDescuento = precioSinDescuento;
+    }
+
+    public double getPrecioConDescuento() {
+        return precioConDescuento;
+    }
+
+    public void setPrecioConDescuento(double precioConDescuento) {
+        this.precioConDescuento = precioConDescuento;
     }
 
     public Date getHoraEstimada() {
@@ -104,7 +114,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "referencia=" + referencia + ", platos=" + platos + ", precioTotal=" + precioTotal + ", horaEstimada=" + horaEstimada + ", localidad=" + localidad + ", direccion=" + direccion + ", codPostal=" + codPostal + ", descuento=" + descuento + '}';
+        return "Pedido{" + "referencia=" + referencia + ", platos=" + platos + ", precioSinDescuento=" + precioSinDescuento + ", precioConDescuento=" + precioConDescuento + ", horaEstimada=" + horaEstimada + ", localidad=" + localidad + ", direccion=" + direccion + ", codPostal=" + codPostal + ", descuento=" + descuento + '}';
     }
 
     
