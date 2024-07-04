@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psi.quetzalkitchen.CatalogueController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="505.0" prefWidth="681.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="com.psi.quetzalkitchen.CatalogueController">
+   <children>
+      <Pane fx:id="Unidad" prefHeight="399.0" prefWidth="690.0" />
+      <Pane layoutX="-5.0" layoutY="389.0" prefHeight="117.0" prefWidth="690.0">
+         <children>
+            <ButtonBar layoutX="148.0" layoutY="33.0" prefHeight="26.0" prefWidth="356.0">
+               <buttons>
+                <Button fx:id="Unidad" mnemonicParsing="false" text="Pedir" />
+                <Button fx:id="Unidad" mnemonicParsing="false" text="Cancelar" />
+                <Button fx:id="Unidad" mnemonicParsing="false" text="Cambiar Usuario" />
+               </buttons>
+            </ButtonBar>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
