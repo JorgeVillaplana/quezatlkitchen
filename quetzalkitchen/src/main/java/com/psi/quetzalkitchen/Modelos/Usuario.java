@@ -21,11 +21,12 @@ public class Usuario {
     private int codPostal;
     private Date fechaNac;
     private int edad;
+    private String email;
 
     public Usuario() {
     }
 
-    public Usuario(String DNI, String nombre, String apellido1, String apellido2, String localidad, String dirección, int codPostal, Date fechaNac) {
+    public Usuario(String DNI, String nombre, String apellido1, String apellido2, String localidad, String dirección, int codPostal, Date fechaNac, String email) {
         this.DNI = DNI;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -34,6 +35,7 @@ public class Usuario {
         this.dirección = dirección;
         this.codPostal = codPostal;
         this.fechaNac = fechaNac;
+        this.email = email;
     }
 
     public String getDNI() {
@@ -108,9 +110,17 @@ public class Usuario {
         this.edad = edad;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "DNI=" + DNI + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", localidad=" + localidad + ", direcci\u00f3n=" + dirección + ", codPostal=" + codPostal + ", fechaNac=" + fechaNac + ", edad=" + edad + '}';
+        return "Usuario{" + "DNI=" + DNI + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", localidad=" + localidad + ", direcci\u00f3n=" + dirección + ", codPostal=" + codPostal + ", fechaNac=" + fechaNac + ", edad=" + edad + ", email=" + email + '}';
     }
     
 }

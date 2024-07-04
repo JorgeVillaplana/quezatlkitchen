@@ -25,6 +25,7 @@ public class Pedido {
     }
 
     public Pedido(String referencia, ArrayList<PlatoEnPedido> articulos, double total, Date horaEstimada, String localidad, String direccion, int codPostal) {
+        
         this.referencia = referencia;
         this.platos = articulos;
         this.precioTotal = total;
@@ -32,6 +33,7 @@ public class Pedido {
         this.localidad = localidad;
         this.direccion = direccion;
         this.codPostal = codPostal;
+        
     }
 
     public String getReferencia() {
@@ -92,7 +94,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "referencia=" + referencia + "platos=" + platos + ", total=" + precioTotal + ", horaEstimada=" + horaEstimada + ", localidad=" + localidad + ", direccion=" + direccion + ", codPostal=" + codPostal + '}';
+        return "Pedido{" + "referencia=" + referencia + ", platos=" + platos + ", total=" + precioTotal + ", horaEstimada=" + horaEstimada + ", localidad=" + localidad + ", direccion=" + direccion + ", codPostal=" + codPostal + '}';
     }
     
     
