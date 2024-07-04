@@ -4,6 +4,7 @@
  */
 package com.psi.quetzalkitchen;
 
+import com.psi.quetzalkitchen.Modelos.Usuario;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,6 +37,9 @@ public class LoginController implements Initializable {
     public void confirm(ActionEvent event){
         String userMail = this.userMail.getText();
         String userPass = this.userPass.getText();
+        Usuario user = new Usuario();
+        user.setEmail(userMail);
+        user.setPass(userPass);
     }
     
     @FXML

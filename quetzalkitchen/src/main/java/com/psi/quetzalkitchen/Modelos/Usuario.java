@@ -16,26 +16,25 @@ public class Usuario {
     private String nombre;
     private String apellido1;
     private String apellido2;
-    private String localidad;
-    private String dirección;
-    private int codPostal;
     private Date fechaNac;
     private int edad;
     private String email;
+    private String pass;
+    private Direccion direccion;
 
     public Usuario() {
     }
 
-    public Usuario(String DNI, String nombre, String apellido1, String apellido2, String localidad, String dirección, int codPostal, Date fechaNac, String email) {
+    public Usuario(String DNI, String nombre, String apellido1, String apellido2, Date fechaNac, int edad, String email, String pass, Direccion direccion) {
         this.DNI = DNI;
         this.nombre = nombre;
         this.apellido1 = apellido1;
         this.apellido2 = apellido2;
-        this.localidad = localidad;
-        this.dirección = dirección;
-        this.codPostal = codPostal;
         this.fechaNac = fechaNac;
+        this.edad = edad;
         this.email = email;
+        this.pass = pass;
+        this.direccion = direccion;
     }
 
     public String getDNI() {
@@ -70,30 +69,6 @@ public class Usuario {
         this.apellido2 = apellido2;
     }
 
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public void setLocalidad(String localidad) {
-        this.localidad = localidad;
-    }
-
-    public String getDirección() {
-        return dirección;
-    }
-
-    public void setDirección(String dirección) {
-        this.dirección = dirección;
-    }
-
-    public int getCodPostal() {
-        return codPostal;
-    }
-
-    public void setCodPostal(int codPostal) {
-        this.codPostal = codPostal;
-    }
-
     public Date getFechaNac() {
         return fechaNac;
     }
@@ -118,9 +93,25 @@ public class Usuario {
         this.email = email;
     }
 
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
     @Override
     public String toString() {
-        return "Usuario{" + "DNI=" + DNI + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", localidad=" + localidad + ", direcci\u00f3n=" + dirección + ", codPostal=" + codPostal + ", fechaNac=" + fechaNac + ", edad=" + edad + ", email=" + email + '}';
+        return "Usuario{" + "DNI=" + DNI + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", fechaNac=" + fechaNac + ", edad=" + edad + ", email=" + email + ", pass=" + pass + ", direccion=" + direccion + '}';
     }
     
 }
