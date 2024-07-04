@@ -4,8 +4,10 @@
  */
 package com.psi.quetzalkitchen;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -23,4 +25,13 @@ public class WelcomeController implements Initializable {
         // TODO
     }    
     
+    @FXML
+    private void switchToLogin() throws IOException {
+        App.setRoot("login");
+    }
+    
+    @FXML
+    private void switchToRegister() throws IOException {
+        App.setRoot("register");
+    }
 }
