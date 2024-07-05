@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author Mañanas
  */
-class Plato {
+public class Plato {
     
     private String nombre;
     private String referencia;

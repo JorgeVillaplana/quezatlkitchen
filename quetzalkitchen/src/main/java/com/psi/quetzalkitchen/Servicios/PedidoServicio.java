@@ -6,33 +6,47 @@ package com.psi.quetzalkitchen.Servicios;
 
 import com.psi.quetzalkitchen.Modelos.Descuento;
 import com.psi.quetzalkitchen.Modelos.Pedido;
+import com.psi.quetzalkitchen.Modelos.PlatoEnPedido;
+import java.util.ArrayList;
 
 /**
  *
  * @author Mañanas
  */
 public class PedidoServicio {
-    
+
+    private ArrayList<PlatoEnPedido> platosEnPedido;
     private Pedido pedido;
     private Descuento descuento;
+
+    public PedidoServicio() {
+    }
     
-    
-    public void ponPrecioConDescuento(String codigoDescuento){
+    public void crearNuevoPedido(String referencia){
+        pedido = new Pedido();
+        if(!platosEnPedido.isEmpty()){
+            pedido.setPlatos(platosEnPedido);
+        }
+        pedido.setReferencia(referencia);
         
         /**
-         * TODO: crear el código que coja el precio sin descuento del pedido,
-         * y con el código que recibe que lo compare con el que trae el objeto descuento
-         * Si funciona, se calcula el precio con descuento del pedido usando el porcentaje
-         * que tiene el objeto descuento, si no se iguala al precio sin descuento.
+         * TODO: Mandar el pedido a BBDD.
          */
-  if (codigoDescuento==descuento.getCodigo()){
-      pedido.setPrecioConDescuento(pedido.getPrecioSinDescuento()-pedido.getPrecioSinDescuento() * descuento.getPorcentaje());
-      pedido.setDescuento(descuento);
-  }else{
-      pedido.setPrecioSinDescuento(pedido.getPrecioSinDescuento());
-  }
+    }
     
+    public void calcularPrecioTotal(){
         
+    }
+
+    public void ponPrecioConDescuento(String codigoDescuento) {
+
+        if (codigoDescuento.equals(descuento.getCodigo())) {
+            pedido.setPrecioConDescuento(pedido.getPrecioSinDescuento() - pedido.getPrecioSinDescuento() * descuento.getPorcentaje());
+            pedido.setDescuento(descuento);
+        } else {
+            pedido.setPrecioSinDescuento(pedido.getPrecioSinDescuento());
+        }
+
     }
 
     @Override
