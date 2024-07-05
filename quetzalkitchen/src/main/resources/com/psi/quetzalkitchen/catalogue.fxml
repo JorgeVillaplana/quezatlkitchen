@@ -13,7 +13,7 @@
          <children>
             <ButtonBar layoutX="148.0" layoutY="33.0" prefHeight="26.0" prefWidth="356.0">
                <buttons>
-                <Button fx:id="Unidad" mnemonicParsing="false" text="Pedir" />
+                <Button fx:id="Unidad" mnemonicParsing="false" onAction="#recogePedido" text="Pedir" />
                 <Button fx:id="Unidad" mnemonicParsing="false" text="Cancelar" />
                 <Button fx:id="Unidad" mnemonicParsing="false" text="Cambiar Usuario" />
                </buttons>
