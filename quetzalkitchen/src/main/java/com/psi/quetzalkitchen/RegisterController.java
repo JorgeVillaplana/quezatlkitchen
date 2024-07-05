@@ -4,12 +4,17 @@
  */
 package com.psi.quetzalkitchen;
 
+import com.psi.quetzalkitchen.Modelos.Direccion;
+import com.psi.quetzalkitchen.Modelos.Usuario;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import java.util.Date;
+
 
 /**
  * FXML Controller class
@@ -27,13 +32,9 @@ public class RegisterController implements Initializable {
     @FXML
     TextField apellido2;
     @FXML
-    TextField birthyear;
-    @FXML
-    TextField birthmonth;
-    @FXML
-    TextField birthday;
-    @FXML
     TextField localidad;
+    @FXML
+    TextField birthdate;
     @FXML
     TextField cp;
     @FXML
@@ -49,7 +50,15 @@ public class RegisterController implements Initializable {
     
     @FXML
     public void confirm(ActionEvent event){
-        
+        Usuario usuario = new Usuario();
+        usuario.setDNI(dni.getText());
+        usuario.setNombre(nombre.getText());
+        usuario.setApellido1(apellido.getText());
+        usuario.setApellido2(apellido2.getText());
+        Date fechaNacimiento = new Date(birthdate.getText());
+        usuario.setFechaNac(fechaNacimiento);
+        Direccion direccion = new Direccion(localidad.getText(), Integer.parseInt(cp.getText()), this.direccion.getText()); 
+        usuario.setDireccion(direccion);
     }
     
     @FXML
@@ -58,11 +67,14 @@ public class RegisterController implements Initializable {
         nombre.setText("");
         apellido.setText("");
         apellido2.setText("");
-        birthday.setText("");
-        birthmonth.setText("");
-        birthyear.setText("");
+        birthdate.setText("");
         localidad.setText("");
         cp.setText("");
         direccion.setText("");
+    }
+    
+    @FXML
+    private void switchToWelcome() throws IOException {
+        App.setRoot("welcome");
     }
 }
