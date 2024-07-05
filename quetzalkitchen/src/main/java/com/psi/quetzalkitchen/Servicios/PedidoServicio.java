@@ -22,12 +22,11 @@ public class PedidoServicio {
     public PedidoServicio() {
     }
     
-    public void crearNuevoPedido(String referencia){
+    public void crearNuevoPedido(){
         pedido = new Pedido();
         if(!platosEnPedido.isEmpty()){
             pedido.setPlatos(platosEnPedido);
         }
-        pedido.setReferencia(referencia);
         
         /**
          * TODO: Mandar el pedido a BBDD.

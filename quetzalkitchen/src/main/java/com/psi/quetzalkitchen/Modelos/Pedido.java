@@ -12,8 +12,8 @@ import java.util.Date;
  * @author Mañanas
  */
 public class Pedido {
-    
-    private String referencia;
+
+    private int id;
     private ArrayList<PlatoEnPedido> platos;
     private double precioSinDescuento;
     private double precioConDescuento;
@@ -24,22 +24,22 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(String referencia, ArrayList<PlatoEnPedido> platos, double precioSinDescuento, double precioConDescuento, Date horaEstimada, Direccion direccion, Descuento descuento) {
-        this.referencia = referencia;
+    public Pedido(int id, ArrayList<PlatoEnPedido> platos, double precioSinDescuento, double precioConDescuento, Date horaEstimada, Direccion direccion, Descuento descuento) {
+        this.id = id;
         this.platos = platos;
         this.precioSinDescuento = precioSinDescuento;
         this.precioConDescuento = precioConDescuento;
         this.horaEstimada = horaEstimada;
         this.direccion = direccion;
         this.descuento = descuento;
-    }    
-
-    public String getReferencia() {
-        return referencia;
     }
 
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public ArrayList<PlatoEnPedido> getPlatos() {
@@ -84,7 +84,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "referencia=" + referencia + ", platos=" + platos + ", precioSinDescuento=" + precioSinDescuento + ", precioConDescuento=" + precioConDescuento + ", horaEstimada=" + horaEstimada + ", direccion=" + direccion + ", descuento=" + descuento + '}';
+        return "Pedido{" + "id=" + id + ", platos=" + platos + ", precioSinDescuento=" + precioSinDescuento + ", precioConDescuento=" + precioConDescuento + ", horaEstimada=" + horaEstimada + ", direccion=" + direccion + ", descuento=" + descuento + '}';
     }
 
 }
