@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS DIRECCION (
     CALLE_NUM_PISO VARCHAR(200) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS USUARIO (
+CREATE TABLE IF NOT EXISTS USUARIO (#Error: 1. No se especifica la longitud máxima para los campos VARCHAR. Es crucial especificarla para evitar problemas con los límites de longitud en bases de datos como MySQL. Solucion: Se tiene que especificar una longitud máxima razonable para los campos NOMBRE, APELLIDO1, APELLIDO2, EMAIL y PASS de tipo VARCHAR.
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     DNI VARCHAR(10) NOT NULL UNIQUE,
     NOMBRE VARCHAR NOT NULL,
@@ -19,15 +19,15 @@ CREATE TABLE IF NOT EXISTS USUARIO (
     CONSTRAINT FOREIGN KEY USUARIO_DIRECCION_FK (ID_DIRECCION) REFERENCES DIRECCION (ID)
 );
 
-CREATE TABLE IF NOT EXISTS RESTAURANTE (
+CREATE TABLE IF NOT EXISTS RESTAURANTE (#Error: El tipo de dato BOOLEAN no es reconocido directamente en MySQL. Debes usar un tipo de dato que MySQL entienda, como TINYINT con una restricción de tamaño (1 para TRUE y 0 para FALSE), o BIT. Solución: Cambia BOOLEAN a TINYINT(1) o BIT para representar valores booleanos en MySQL.
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     NOMBRE VARCHAR NOT NULL,
     EMPRESA_ENVIO_PROPIA BOOLEAN NOT NULL,
     ID_DIRECCION INT,
     CONSTRAINT FOREIGN KEY RESTAURANTE_DIRECCION_FK (ID_DIRECCION) REFERENCES DIRECCION (ID)
-)
+);
 
-CREATE TABLE IF NOT EXISTS PLATO (
+CREATE TABLE IF NOT EXISTS PLATO (#Error: No se especificó la longitud máxima para los campos VARCHAR. Solución: Solución: Se especificó una longitud máxima razonable para los campos REFERENCIA y NOMBRE de tipo VARCHAR.
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     REFERENCIA VARCHAR NOT NULL UNIQUE,
     NOMBRE VARCHAR NOT NULL,
@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS DESCUENTO (
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     CODIGO VARCHAR NOT NULL UNIQUE,
     PORCENTAJE INT NOT NULL
-):
+);
 
-CREATE TABLE IF NOT EXISTS PEDIDO (
+CREATE TABLE IF NOT EXISTS PEDIDO (#Error: El uso de INTERVAL en CURRENT_TIMESTAMP + INTERVAL 150000 SECOND no es válido en MySQL. Solución: Utiliza INTERVAL de manera correcta en MySQL. Por ejemplo, CURRENT_TIMESTAMP + INTERVAL 150000 SECOND debería ser modificado para cumplir con la sintaxis válida de MySQL.
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     REFERENCIA VARCHAR NOT NULL,
     ID_DESCUENTO INT,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS PEDIDO (
     CONSTRAINT FOREIGN KEY PEDIDO_USUARIO_FK (ID_USUARIO) REFERENCES USUARIO (ID)
 );
 
-CREATE TABLE IF NOT EXISTS PLATO_EN_PEDIDO (
+CREATE TABLE IF NOT EXISTS PLATO_EN_PEDIDO (#Error: No se especificaron los nombres para las restricciones de clave externa (FOREIGN KEY). Solución: Especifica nombres para las restricciones de clave externa (FOREIGN KEY) para mejorar la claridad y la gestión de la base de datos.
     ID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ID_PLATO INT NOT NULL,
     ID_PEDIDO INT NOT NULL,
