@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="505.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psi.quetzalkitchen.CatalogueController">
    <children>
-      <ScrollPane fx:id="Catalogo" hbarPolicy="NEVER" prefHeight="388.0" prefWidth="685.0" />
+      <ScrollPane fx:id="Catalogo" hbarPolicy="NEVER" prefHeight="379.0" prefWidth="686.0" />
       <Pane layoutX="-5.0" layoutY="389.0" prefHeight="117.0" prefWidth="690.0">
          <children>
             <ButtonBar layoutX="148.0" layoutY="33.0" prefHeight="26.0" prefWidth="356.0">
