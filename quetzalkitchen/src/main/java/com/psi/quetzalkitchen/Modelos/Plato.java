@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * @author Mañanas
  */
 public class Plato {
-    
+
+    private int id;
     private String nombre;
-    private String referencia;
     private double precioUnitario;
     private Restaurante restaurante;
     private ArrayList<Alergeno> alergenos;
@@ -21,9 +21,9 @@ public class Plato {
     public Plato() {
     }
 
-    public Plato(String nombre, String referencia, double precioUnitario, Restaurante restaurante, ArrayList<Alergeno> alergenos) {
+    public Plato(int id, String nombre, double precioUnitario, Restaurante restaurante, ArrayList<Alergeno> alergenos) {
+        this.id = id;
         this.nombre = nombre;
-        this.referencia = referencia;
         this.precioUnitario = precioUnitario;
         this.restaurante = restaurante;
         this.alergenos = alergenos;
@@ -37,12 +37,12 @@ public class Plato {
         this.nombre = nombre;
     }
 
-    public String getReferencia() {
-        return referencia;
+    public int getId() {
+        return id;
     }
 
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
+    public void setid(int id) {
+        this.id = id;
     }
 
     public double getPrecioUnitario() {
@@ -71,7 +71,7 @@ public class Plato {
 
     @Override
     public String toString() {
-        return "Articulo{" + "nombre=" + nombre + ", referencia=" + referencia + ", precioUnitario=" + precioUnitario + ", restaurante=" + restaurante + ", alergenos=" + alergenos + '}';
+        return "Articulo{" + "id=" + id + ", nombre=" + nombre + ", precioUnitario=" + precioUnitario + ", restaurante=" + restaurante + ", alergenos=" + alergenos + '}';
     }
-    
+
 }
