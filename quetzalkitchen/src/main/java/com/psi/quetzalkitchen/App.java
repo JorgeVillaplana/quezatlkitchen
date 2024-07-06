@@ -1,5 +1,6 @@
 package com.psi.quetzalkitchen;
 
+import com.psi.quetzalkitchen.Connection.ConnectDB;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,6 +33,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        ConnectDB.connect();
         launch();
     }
 
