@@ -10,6 +10,7 @@ package com.psi.quetzalkitchen.Modelos;
  */
 public class Restaurante {
 
+    private int id;
     private String nombre;
     private boolean empresaEnvioPropia;
     private Direccion direccion;
@@ -45,6 +46,14 @@ public class Restaurante {
 
     public void setEmpresaEnvioPropia(boolean empresaEnvioPropia) {
         this.empresaEnvioPropia = empresaEnvioPropia;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

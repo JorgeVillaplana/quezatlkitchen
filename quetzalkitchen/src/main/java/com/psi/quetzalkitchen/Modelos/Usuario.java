@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Usuario {
     
+    private int id;
     private String DNI;
     private String nombre;
     private String apellido1;
@@ -107,6 +108,14 @@ public class Usuario {
 
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

@@ -28,7 +28,7 @@ import javafx.scene.layout.VBox;
 public class CatalogueController implements Initializable {
 
     private ArrayList<Plato> platos;
-    private PlatoServicio platoServicio = new PlatoServicio();
+    private final PlatoServicio platoServicio = new PlatoServicio();
     @FXML
     private ScrollPane catalogo;
 

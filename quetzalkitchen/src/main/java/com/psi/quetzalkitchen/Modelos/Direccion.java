@@ -10,6 +10,7 @@ package com.psi.quetzalkitchen.Modelos;
  */
 public class Direccion {
     
+    private int id;
     private String localidad;
     private int codigoPostal;
     private String callePortalPiso;
@@ -45,6 +46,14 @@ public class Direccion {
 
     public void setCallePortalPiso(String callePortalPiso) {
         this.callePortalPiso = callePortalPiso;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

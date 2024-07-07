@@ -4,9 +4,14 @@
  */
 package com.psi.quetzalkitchen.Servicios;
 
-import com.psi.quetzalkitchen.Modelos.Plato;
+import com.psi.quetzalkitchen.Connection.ConnectDB;
 import com.psi.quetzalkitchen.Modelos.Restaurante;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,12 +33,30 @@ public class RestauranteServicio {
         return this.restaurantes;
     }
     
-    public Restaurante obtenRestauranteDePlato(Plato plato){
+    public Restaurante getRestauranteById(int id){
         
         Restaurante restaurante = new Restaurante();
-        /**
-         * TODO: 
-         */
+        
+        Statement stm;
+        try {
+            stm = ConnectDB.con.createStatement();
+            ResultSet result = stm.executeQuery("SELECT * FROM RESTAURANTE WHERE ID = " + id);
+
+            while (result.next()) {
+
+                restaurante.setId(result.getInt("ID"));
+                restaurante.setNombre(result.getString("NOMBRE"));
+                restaurante.setEmpresaEnvioPropia( (result.getByte("EMPRESA_ENVIO_PROPIA") == 1) );
+                
+                DireccionServicio direccionServ = new DireccionServicio();
+                
+                restaurante.setDireccion(direccionServ.getDireccionById(result.getInt("ID_DIRECCION")));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return restaurante;
     }
 
