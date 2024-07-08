@@ -4,10 +4,17 @@
  */
 package com.psi.quetzalkitchen.Servicios;
 
+import com.psi.quetzalkitchen.Connection.ConnectDB;
 import com.psi.quetzalkitchen.Modelos.Descuento;
 import com.psi.quetzalkitchen.Modelos.Pedido;
 import com.psi.quetzalkitchen.Modelos.PlatoEnPedido;
+import com.psi.quetzalkitchen.Modelos.Usuario;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,19 +25,35 @@ public class PedidoServicio {
     private ArrayList<PlatoEnPedido> platosEnPedido;
     private Pedido pedido;
     private Descuento descuento;
+    private Usuario usuario;
 
     public PedidoServicio() {
     }
     
-    public void crearNuevoPedido(){
+    public void crearNuevoPedido(Usuario usuario){
         pedido = new Pedido();
         if(!platosEnPedido.isEmpty()){
             pedido.setPlatos(platosEnPedido);
         }
         
-        /**
-         * TODO: Mandar el pedido a BBDD.
-         */
+        PreparedStatement stm;
+        try {
+            String[] campos = {"ID_USUARIO","PRECIO_SIN_DESCUENTO"};
+            stm = ConnectDB.con.prepareStatement("INSERT INTO PEDIDO", campos);
+//            stm.setString(0, );
+//
+//            while (result.next()) {
+//
+//                plato.setId(result.getInt("ID"));
+//                plato.setNombre(result.getString("NOMBRE"));
+//                plato.setPrecioUnitario(result.getDouble("PRECIO_UNITARIO"));
+//                plato.setAlergenos(aleServ.getAlergenosByPlato(plato));
+//                
+//            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void calcularPrecioTotal(){

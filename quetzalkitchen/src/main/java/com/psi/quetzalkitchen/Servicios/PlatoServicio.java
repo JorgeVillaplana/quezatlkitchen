@@ -47,9 +47,28 @@ public class PlatoServicio {
 
     public ArrayList<Plato> getAllPlatos() {
         ArrayList<Plato> platos = new ArrayList<Plato>();
-        /**
-         * TODO: Coger de BBDD todos los platos de la tabla.
-         */
+        
+        AlergenoServicio aleServ = new AlergenoServicio();
+        Statement stm;
+        try {
+            stm = ConnectDB.con.createStatement();
+            ResultSet result = stm.executeQuery("SELECT * FROM PLATO");
+
+            while (result.next()) {
+                Plato plato = new Plato();
+                
+                plato.setId(result.getInt("ID"));
+                plato.setNombre(result.getString("NOMBRE"));
+                plato.setPrecioUnitario(result.getDouble("PRECIO_UNITARIO"));
+                plato.setAlergenos(aleServ.getAlergenosByPlato(plato));
+                
+                platos.add(plato);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return platos;
     }
 }

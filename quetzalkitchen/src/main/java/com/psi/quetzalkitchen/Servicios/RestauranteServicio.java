@@ -18,25 +18,24 @@ import java.util.logging.Logger;
  * @author Mañanas
  */
 public class RestauranteServicio {
-    
+
     private ArrayList<Restaurante> restaurantes;
 
     public RestauranteServicio() {
     }
-    
-    public ArrayList<Restaurante> obtenerRestaurantes(){
-        
+
+    public ArrayList<Restaurante> obtenerRestaurantes() {
+
         /**
          * TODO: Hacer el método para coger los restaurantes de BD.
-         */        
-        
+         */
         return this.restaurantes;
     }
-    
-    public Restaurante getRestauranteById(int id){
-        
+
+    public Restaurante getRestauranteById(int id) {
+
         Restaurante restaurante = new Restaurante();
-        
+
         Statement stm;
         try {
             stm = ConnectDB.con.createStatement();
@@ -46,10 +45,10 @@ public class RestauranteServicio {
 
                 restaurante.setId(result.getInt("ID"));
                 restaurante.setNombre(result.getString("NOMBRE"));
-                restaurante.setEmpresaEnvioPropia( (result.getByte("EMPRESA_ENVIO_PROPIA") == 1) );
-                
+                restaurante.setEmpresaEnvioPropia((result.getInt("ENVIO") == 1));
+
                 DireccionServicio direccionServ = new DireccionServicio();
-                
+
                 restaurante.setDireccion(direccionServ.getDireccionById(result.getInt("ID_DIRECCION")));
 
             }
@@ -67,5 +66,5 @@ public class RestauranteServicio {
     public void setRestaurantes(ArrayList<Restaurante> restaurantes) {
         this.restaurantes = restaurantes;
     }
-    
+
 }

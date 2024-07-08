@@ -18,16 +18,15 @@ public class ConnectDB {
     public static Connection con = null;
 
     public static void connect() {
-        TunnelSSH.connectTunnel();
+
         System.out.println("Conectando a la base de datos...");
         try {
             DriverManager.setLoginTimeout(45);
-            String hostURL = "jdbc:mysql://" + UtilConstants.DB_URL + "/" + UtilConstants.DB_NAME + "?autoReconnect=true&useSSL=false";
+            String hostURL = "jdbc:mariadb://" + UtilConstants.DB_URL + ":" + UtilConstants.DB_PORT + "/" + UtilConstants.DB_NAME;
             con = DriverManager.getConnection(hostURL, UtilConstants.DB_USER, UtilConstants.DB_PASS);
             System.out.println("Conexión realizada con éxito");
         } catch (SQLException ex) {
             // handle any errors
-            TunnelSSH.closeTunnel();
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());

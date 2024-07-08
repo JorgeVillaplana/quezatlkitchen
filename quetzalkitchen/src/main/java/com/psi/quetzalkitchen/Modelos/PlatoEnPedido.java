@@ -12,6 +12,7 @@ public class PlatoEnPedido {
     
     private int id;
     private Plato plato;
+    private Pedido pedido;
     private int cantidad;
     private double precioPlatos;
 
@@ -54,6 +55,14 @@ public class PlatoEnPedido {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     @Override
