@@ -10,6 +10,7 @@ package com.psi.quetzalkitchen.Modelos;
  */
 public class Alergeno {
     
+    private int id;
     private String nombre;
 
     public Alergeno() {
@@ -25,6 +26,14 @@ public class Alergeno {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

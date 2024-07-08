@@ -21,9 +21,10 @@ public class CatalogoServicio {
     }
 
     public ArrayList<Plato> getAllPlatos() {
-        /**
-         * TODO: Obtener platos de la BBDD.
-         */
+        
+        PlatoServicio platoServ = new PlatoServicio();
+        this.platos = platoServ.getAllPlatos();
+        
         return this.platos;
     }
 
@@ -32,7 +33,11 @@ public class CatalogoServicio {
 
         if (platos.size() == cantidades.size()) {
             for (int i = 0; i < platos.size(); i++) {
-                platosEnPedido.add(platPedSer.calculaPrecio(platos.get(i), cantidades.get(i)));
+                PlatoEnPedido plato= new PlatoEnPedido();
+                plato.setPlato(platos.get(i));
+                plato.setCantidad(cantidades.get(i));
+                plato.setPrecioPlatos(platPedSer.calculaPrecio(platos.get(i), cantidades.get(i)));
+                platosEnPedido.add( plato );
             }
         }
         

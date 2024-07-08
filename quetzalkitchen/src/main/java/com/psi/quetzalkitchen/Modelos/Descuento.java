@@ -10,6 +10,7 @@ package com.psi.quetzalkitchen.Modelos;
  */
 public class Descuento {
     
+    private int id;
     private String codigo;
     private int porcentaje;
 
@@ -35,6 +36,14 @@ public class Descuento {
 
     public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

@@ -82,6 +82,10 @@ public class Pedido {
         this.descuento = descuento;
     }
 
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
     @Override
     public String toString() {
         return "Pedido{" + "id=" + id + ", platos=" + platos + ", precioSinDescuento=" + precioSinDescuento + ", precioConDescuento=" + precioConDescuento + ", horaEstimada=" + horaEstimada + ", direccion=" + direccion + ", descuento=" + descuento + '}';

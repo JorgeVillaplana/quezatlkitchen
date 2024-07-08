@@ -6,6 +6,7 @@ package com.psi.quetzalkitchen;
 
 import com.psi.quetzalkitchen.Modelos.Direccion;
 import com.psi.quetzalkitchen.Modelos.Usuario;
+import com.psi.quetzalkitchen.Servicios.UsuarioServicio;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import java.util.Date;
 
 
 /**
@@ -34,11 +34,11 @@ public class RegisterController implements Initializable {
     @FXML
     TextField localidad;
     @FXML
-    TextField birthdate;
-    @FXML
     TextField cp;
     @FXML
     TextField direccion;
+    @FXML
+    TextField edad;
     
     /**
      * Initializes the controller class.
@@ -49,16 +49,20 @@ public class RegisterController implements Initializable {
     }    
     
     @FXML
-    public void confirm(ActionEvent event){
+    public void confirm(ActionEvent event) throws IOException{
         Usuario usuario = new Usuario();
         usuario.setDNI(dni.getText());
         usuario.setNombre(nombre.getText());
         usuario.setApellido1(apellido.getText());
         usuario.setApellido2(apellido2.getText());
-        Date fechaNacimiento = new Date(birthdate.getText());
-        usuario.setFechaNac(fechaNacimiento);
+        usuario.setEdad(Integer.parseInt(edad.getText()));
         Direccion direccion = new Direccion(localidad.getText(), Integer.parseInt(cp.getText()), this.direccion.getText()); 
         usuario.setDireccion(direccion);
+        
+        UsuarioServicio usuServ = new UsuarioServicio();
+        Session.setUsuario(usuServ.setNuevoUsuario(usuario));
+        
+        App.setRoot("login");
     }
     
     @FXML
@@ -67,7 +71,7 @@ public class RegisterController implements Initializable {
         nombre.setText("");
         apellido.setText("");
         apellido2.setText("");
-        birthdate.setText("");
+        edad.setText("");
         localidad.setText("");
         cp.setText("");
         direccion.setText("");

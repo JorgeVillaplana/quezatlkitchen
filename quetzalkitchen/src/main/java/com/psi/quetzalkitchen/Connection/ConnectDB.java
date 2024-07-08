@@ -4,27 +4,46 @@
  */
 package com.psi.quetzalkitchen.Connection;
 
+import com.psi.quetzalkitchen.Constants.UtilConstants;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
  * @author jorge
  */
 public class ConnectDB {
-    
-    private static final String URLDATABASE = "jdbc:mariadb://localhost:3306/";
-    private static final String NAMEDB = "quetzalkitchendb";
-    private static final String USERDB = "root";
-    private static final String PASSDB = "1234";
-    
-    public void connect(){
-        try{
-            Connection con = DriverManager.getConnection(URLDATABASE+NAMEDB , USERDB, PASSDB);
-            
-        }catch(Exception e){
-            
+
+    public static Connection con = null;
+
+    public static void connect() {
+//        TunnelSSH.connectTunnel();
+        System.out.println("Conectando a la base de datos...");
+        try {
+            DriverManager.setLoginTimeout(45);
+            String hostURL = "jdbc:mariadb://" + UtilConstants.DB_URL + ":" + UtilConstants.DB_PORT + "/" + UtilConstants.DB_NAME;
+            con = DriverManager.getConnection(hostURL, UtilConstants.DB_USER, UtilConstants.DB_PASS);
+            System.out.println("Conexión realizada con éxito");
+        } catch (SQLException ex) {
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+
         }
     }
-    
+
+    public static void closeCon() {
+        try {
+            if (con != null && !con.isClosed()) {
+                con.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+        }
+    }
+
 }
