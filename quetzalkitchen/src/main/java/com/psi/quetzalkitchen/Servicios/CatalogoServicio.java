@@ -6,6 +6,7 @@ package com.psi.quetzalkitchen.Servicios;
 
 import com.psi.quetzalkitchen.Modelos.Plato;
 import com.psi.quetzalkitchen.Modelos.PlatoEnPedido;
+import com.psi.quetzalkitchen.Session;
 import java.util.ArrayList;
 
 /**
@@ -41,9 +42,7 @@ public class CatalogoServicio {
             }
         }
         
-        /**
-         * TODO: Mandar a base de datos platosEnPedido, creando primero el pedido.
-         */
+       Session.getPedido().setPlatos(platosEnPedido);
     }
 
     public ArrayList<Plato> getPlatos() {

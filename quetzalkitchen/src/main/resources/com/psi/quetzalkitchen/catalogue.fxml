@@ -4,18 +4,21 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
 <AnchorPane id="AnchorPane" prefHeight="505.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psi.quetzalkitchen.CatalogueController">
    <children>
-      <ScrollPane fx:id="Catalogo" hbarPolicy="NEVER" prefHeight="379.0" prefWidth="686.0" />
+      <ScrollPane fx:id="catalogo" hbarPolicy="NEVER" prefHeight="379.0" prefWidth="686.0">
+          <HBox fx:id="grande" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="contenedor" />
+      </ScrollPane>
       <Pane layoutX="-5.0" layoutY="389.0" prefHeight="117.0" prefWidth="690.0">
          <children>
             <ButtonBar layoutX="148.0" layoutY="33.0" prefHeight="26.0" prefWidth="356.0">
                <buttons>
-                <Button fx:id="Unidad" mnemonicParsing="false" onAction="#recogePedido" text="Pedir" />
-                <Button fx:id="Unidad" mnemonicParsing="false" text="Cancelar" />
-                <Button fx:id="Unidad" mnemonicParsing="false" text="Cambiar Usuario" />
+                <Button fx:id="submit" mnemonicParsing="false" onAction="#recogePedido" text="Pedir" />
+                <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
+                <Button fx:id="change" mnemonicParsing="false" onAction="#showLogin" text="Cambiar Usuario" />
                </buttons>
             </ButtonBar>
          </children>

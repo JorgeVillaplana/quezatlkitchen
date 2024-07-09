@@ -8,50 +8,69 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane id="AnchorPane" prefHeight="620.0" prefWidth="774.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psi.quetzalkitchen.RegisterController">
-   <children>
-      <Text layoutX="84.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce los valores en los campos correspondientes">
-         <font>
-            <Font size="14.0" />
-         </font></Text>
-      <TextField fx:id="nombre" layoutX="84.0" layoutY="132.0" promptText="Nombre">
+    <children>
+        <Text layoutX="84.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce los valores en los campos correspondientes">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Text>
+        <TextField fx:id="nombre" layoutX="84.0" layoutY="132.0" promptText="Nombre">
+            <tooltip>
+                <Tooltip text="Nombre" />
+            </tooltip>
+        </TextField>
+        <TextField fx:id="apellido" layoutX="312.0" layoutY="132.0" promptText="Primer apellido">
+            <tooltip>
+                <Tooltip text="Primer apellido" />
+            </tooltip>
+        </TextField>
+        <TextField fx:id="apellido2" layoutX="519.0" layoutY="132.0" promptText="Segundo apellido">
+            <tooltip>
+                <Tooltip text="Segundo apellido" />
+            </tooltip>
+        </TextField>
+        <TextField fx:id="dni" layoutX="85.0" layoutY="190.0" promptText="DNI/NIE">
+            <tooltip>
+                <Tooltip text="DNI/NIE" />
+            </tooltip>
+        </TextField>
+        <TextField fx:id="edad" layoutX="313.0" layoutY="190.0" promptText="Edad">
+            <tooltip>
+                <Tooltip text="Fecha de nacimiento" />
+            </tooltip>
+        </TextField>
+      <TextField fx:id="email" layoutX="85.0" layoutY="252.0" promptText="Correo electrónico">
          <tooltip>
-            <Tooltip text="Nombre" />
-         </tooltip></TextField>
-      <TextField fx:id="apellido" layoutX="312.0" layoutY="132.0" promptText="Primer apellido">
+            <Tooltip text="Correo electrónico" />
+         </tooltip>
+      </TextField>
+      <TextField fx:id="pass" layoutX="313.0" layoutY="252.0" promptText="Contraseña">
          <tooltip>
-            <Tooltip text="Primer apellido" />
-         </tooltip></TextField>
-      <TextField fx:id="apellido2" layoutX="519.0" layoutY="132.0" promptText="Segundo apellido">
-         <tooltip>
-            <Tooltip text="Segundo apellido" />
-         </tooltip></TextField>
-      <TextField fx:id="edad" layoutX="319.0" layoutY="226.0" promptText="Edad">
-         <tooltip>
-            <Tooltip text="Fecha de nacimiento" />
-         </tooltip></TextField>
-      <TextField fx:id="localidad" layoutX="85.0" layoutY="324.0" promptText="Localidad">
-         <tooltip>
-            <Tooltip text="Localidad" />
-         </tooltip></TextField>
-      <TextField fx:id="cp" layoutX="302.0" layoutY="324.0" promptText="Código postal">
-         <tooltip>
-            <Tooltip text="Código postal" />
-         </tooltip></TextField>
-      <TextField fx:id="direccion" layoutX="520.0" layoutY="324.0" promptText="Dirección">
-         <tooltip>
-            <Tooltip text="Dirección" />
-         </tooltip></TextField>
-      <TextField fx:id="dni" layoutX="84.0" layoutY="226.0" promptText="DNI/NIE">
-         <tooltip>
-            <Tooltip text="DNI/NIE" />
-         </tooltip></TextField>
-      <Button fx:id="confirm" layoutX="250.0" layoutY="452.0" mnemonicParsing="false" onAction="#confirm" text="Confirmar" />
-      <Button fx:id="delete" layoutX="451.0" layoutY="452.0" mnemonicParsing="false" onAction="#deleteAll" text="Borrar Todo" />
-      <Text fx:id="errorMessage" fill="#ff0303" layoutX="353.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </Text>
-      <Button fx:id="returnToWelcome" layoutX="342.0" layoutY="519.0" mnemonicParsing="false" onAction="#switchToWelcome" text="Volver a inicio" />
-   </children>
+            <Tooltip text="Contraseña" />
+         </tooltip>
+      </TextField>
+        <TextField fx:id="localidad" layoutX="84.0" layoutY="324.0" promptText="Localidad">
+            <tooltip>
+                <Tooltip text="Localidad" />
+            </tooltip>
+        </TextField>
+        <TextField fx:id="cp" layoutX="313.0" layoutY="324.0" promptText="Código postal">
+            <tooltip>
+                <Tooltip text="Código postal" />
+            </tooltip>
+        </TextField>
+        <TextField fx:id="direccion" layoutX="519.0" layoutY="324.0" promptText="Dirección">
+            <tooltip>
+                <Tooltip text="Dirección" />
+            </tooltip>
+        </TextField>
+        <Button fx:id="confirm" layoutX="250.0" layoutY="452.0" mnemonicParsing="false" onAction="#confirm" text="Confirmar" />
+        <Button fx:id="delete" layoutX="451.0" layoutY="452.0" mnemonicParsing="false" onAction="#deleteAll" text="Borrar Todo" />
+        <Text fx:id="errorMessage" fill="#ff0303" layoutX="353.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Button fx:id="returnToWelcome" layoutX="342.0" layoutY="519.0" mnemonicParsing="false" onAction="#switchToWelcome" text="Volver a inicio" />
+    </children>
 </AnchorPane>

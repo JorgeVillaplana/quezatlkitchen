@@ -8,7 +8,10 @@ import com.psi.quetzalkitchen.Connection.ConnectDB;
 import com.psi.quetzalkitchen.Modelos.Plato;
 import com.psi.quetzalkitchen.Modelos.PlatoEnPedido;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +22,7 @@ import java.util.logging.Logger;
 public class PlatosEnPedidoServicio {
 
     private PlatoEnPedido plato;
+    private static ArrayList<PlatoEnPedido> platosParaPedido;
 
     public PlatosEnPedidoServicio() {
 
@@ -29,13 +33,13 @@ public class PlatosEnPedidoServicio {
 
     }
 
-    public boolean insertarPlatoEnPedido(PlatoEnPedido plato) {
+    public PlatoEnPedido insertarPlatoEnPedido(PlatoEnPedido plato) {
         PreparedStatement stm;
         try {
-            String[] campos = {"ID_PLATO", "CANTIDAD", "PRECIO_PLATOS", "ID_PEDIDO"};
+            String sql = "INSERT INTO PLATO_EN_PEDIDO (ID_PLATO, CANTIDAD, PRECIO_PLATOS, ID_PEDIDO) VALUES(?,?,?,?)";
 
-            stm = ConnectDB.con.prepareStatement("INSERT INTO PLATO_EN_PEDIDO", campos);
-            stm.setInt(0, plato.getPlato().getId());
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setInt(1, plato.getPlato().getId());
             stm.setInt(1, plato.getCantidad());
             stm.setDouble(2, calculaPrecio(plato.getPlato(), plato.getCantidad()));
             stm.setInt(3, plato.getPedido() != null ?  (int) plato.getPedido().getId() : null);
@@ -43,11 +47,27 @@ public class PlatosEnPedidoServicio {
             int affectedRows = stm.executeUpdate();
 
             if (affectedRows > 0) {
-                return true;
+                ResultSet result = stm.getGeneratedKeys();
+                while(result.next()){
+                    plato.setId(result.getInt("ID"));
+                }
+                
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
-        return false;
+        return plato;
     }
+
+    public static ArrayList<PlatoEnPedido> getPlatosParaPedido() {
+        return platosParaPedido;
+    }
+
+    public static void setPlatosParaPedido(ArrayList<PlatoEnPedido> platosParaPedido) {
+        PlatosEnPedidoServicio.platosParaPedido = platosParaPedido;
+    }
+    
+    
 }

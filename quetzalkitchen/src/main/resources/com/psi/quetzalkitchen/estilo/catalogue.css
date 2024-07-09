@@ -1,0 +1,24 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 9 jul 2024, 4:38:05
+    Author     : jorge
+*/
+
+.contenedor {
+    display: flex;
+    flex-wrap: wrap;
+  overflow: hidden; /* Ocultar el desbordamiento de los elementos flotantes */
+}
+
+.left {
+  flex: 50%;
+  width: 50%; /* Ocupar la mitad del ancho */
+}
+
+.right {
+  flex: 50%;
+  width: 50%; /* Ocupar la mitad del ancho */
+}

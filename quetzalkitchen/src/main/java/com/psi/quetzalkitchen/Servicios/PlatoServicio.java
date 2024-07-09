@@ -6,6 +6,7 @@ package com.psi.quetzalkitchen.Servicios;
 
 import com.psi.quetzalkitchen.Connection.ConnectDB;
 import com.psi.quetzalkitchen.Modelos.Plato;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,10 +26,13 @@ public class PlatoServicio {
     public Plato getPlatoById(int id) {
         Plato plato = new Plato();
         AlergenoServicio aleServ = new AlergenoServicio();
-        Statement stm;
+        RestauranteServicio resServ = new RestauranteServicio();
+        PreparedStatement stm;
         try {
-            stm = ConnectDB.con.createStatement();
-            ResultSet result = stm.executeQuery("SELECT * FROM PLATO WHERE ID = " + id);
+            String sql = "SELECT * FROM PLATO WHERE ID = ?";
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setInt(1, id);
+            ResultSet result = stm.executeQuery();
 
             while (result.next()) {
 
@@ -36,18 +40,21 @@ public class PlatoServicio {
                 plato.setNombre(result.getString("NOMBRE"));
                 plato.setPrecioUnitario(result.getDouble("PRECIO_UNITARIO"));
                 plato.setAlergenos(aleServ.getAlergenosByPlato(plato));
+                plato.setRestaurante(resServ.getRestauranteById(result.getInt("ID_RESTAURANTE")));
                 
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
         return plato;
     }
 
     public ArrayList<Plato> getAllPlatos() {
         ArrayList<Plato> platos = new ArrayList<Plato>();
-        
+        RestauranteServicio resServ = new RestauranteServicio();
         AlergenoServicio aleServ = new AlergenoServicio();
         Statement stm;
         try {
@@ -61,12 +68,16 @@ public class PlatoServicio {
                 plato.setNombre(result.getString("NOMBRE"));
                 plato.setPrecioUnitario(result.getDouble("PRECIO_UNITARIO"));
                 plato.setAlergenos(aleServ.getAlergenosByPlato(plato));
+                plato.setRestaurante(resServ.getRestauranteById(result.getInt("ID_RESTAURANTE")));
+                
                 
                 platos.add(plato);
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
         
         return platos;

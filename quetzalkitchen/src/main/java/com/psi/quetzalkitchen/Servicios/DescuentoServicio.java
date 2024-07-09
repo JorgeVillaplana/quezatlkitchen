@@ -6,6 +6,7 @@ package com.psi.quetzalkitchen.Servicios;
 
 import com.psi.quetzalkitchen.Connection.ConnectDB;
 import com.psi.quetzalkitchen.Modelos.Descuento;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,10 +22,12 @@ public class DescuentoServicio {
     public Descuento getDescuentoById(int id) {
         Descuento descuento = new Descuento();
 
-        Statement stm;
+        PreparedStatement stm;
         try {
-            stm = ConnectDB.con.createStatement();
-            ResultSet result = stm.executeQuery("SELECT * FROM DESCUENTO WHERE ID = " + id);
+            String sql = "SELECT * FROM DESCUENTO WHERE ID = ?";
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setInt(1, id);
+            ResultSet result = stm.executeQuery();
 
             while (result.next()) {
 
@@ -35,7 +38,9 @@ public class DescuentoServicio {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(DescuentoServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
         return descuento;
     }
@@ -43,10 +48,12 @@ public class DescuentoServicio {
     public Descuento getDescuentoByCodigo(String codigo) {
         Descuento descuento = new Descuento();
 
-        Statement stm;
+        PreparedStatement stm;
         try {
-            stm = ConnectDB.con.createStatement();
-            ResultSet result = stm.executeQuery("SELECT * FROM DESCUENTO WHERE CODIGO = " + codigo);
+            String sql = "SELECT * FROM DESCUENTO WHERE CODIGO = ?";
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setString(1, codigo);
+            ResultSet result = stm.executeQuery();
 
             while (result.next()) {
 

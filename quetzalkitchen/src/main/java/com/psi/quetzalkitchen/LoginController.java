@@ -36,18 +36,19 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    public void confirm(ActionEvent event) {
-        String userMail = this.userMail.getText();
-        String userPass = this.userPass.getText();
+    public void confirm(ActionEvent event) throws IOException {
+        Usuario usuario = new Usuario();
+
+        usuario.setEmail(this.userMail.getText());
+        usuario.setPass(this.userPass.getText());
         UsuarioServicio userServ = new UsuarioServicio();
-        if (Session.getUsuario() != null) {
-            if (userMail.equals(Session.getUsuario().getEmail()) && userPass.equals(Session.getUsuario().getPass())) {
-
-            }
-        } else {
-            ArrayList<Usuario> usuarios = userServ.getAllUsers();
+        usuario = userServ.getUsuarioByEmailAndPass(usuario);
+        if(usuario.getNombre().isEmpty() || usuario.getNombre() == null){
+            Session.setMensajeError("El usuario no está registrado");
+            App.setRoot("errorWindow");
+        }else{
+            App.setRoot("catalogue");
         }
-
     }
 
     @FXML

@@ -9,91 +9,120 @@ import com.psi.quetzalkitchen.Modelos.Descuento;
 import com.psi.quetzalkitchen.Modelos.Pedido;
 import com.psi.quetzalkitchen.Modelos.PlatoEnPedido;
 import com.psi.quetzalkitchen.Modelos.Usuario;
+import com.psi.quetzalkitchen.Session;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Mañanas
  */
 public class PedidoServicio {
-
+    
     private ArrayList<PlatoEnPedido> platosEnPedido;
     private Pedido pedido;
     private Descuento descuento;
     private Usuario usuario;
-
+    
     public PedidoServicio() {
+        this.pedido = Session.getPedido();
+        this.usuario = Session.getUsuario();
     }
     
-    public void crearNuevoPedido(Usuario usuario){
-        pedido = new Pedido();
-        if(!platosEnPedido.isEmpty()){
-            pedido.setPlatos(platosEnPedido);
-        }
+    public void crearNuevoPedido() {
+        pedido = Session.getPedido();
         
         PreparedStatement stm;
         try {
-            String[] campos = {"ID_USUARIO","PRECIO_SIN_DESCUENTO"};
-            stm = ConnectDB.con.prepareStatement("INSERT INTO PEDIDO", campos);
-//            stm.setString(0, );
-//
-//            while (result.next()) {
-//
-//                plato.setId(result.getInt("ID"));
-//                plato.setNombre(result.getString("NOMBRE"));
-//                plato.setPrecioUnitario(result.getDouble("PRECIO_UNITARIO"));
-//                plato.setAlergenos(aleServ.getAlergenosByPlato(plato));
-//                
-//            }
-
+            String sql = "INSERT INTO PEDIDO (ID_USUARIO, PRECIO_SIN_DESCUENTO) VALUES (?,?)";
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setInt(1, this.usuario.getId());
+            stm.setDouble(2, this.calcularPrecioTotal(pedido));
+            int affectedRows = stm.executeUpdate();
+            if (affectedRows > 0) {
+                ResultSet result = stm.getGeneratedKeys();
+                
+                while (result.next()) {
+                    
+                    this.pedido.setId(result.getInt("ID"));
+                    if (!this.pedido.getPlatos().isEmpty()) {
+                        for (PlatoEnPedido plato : this.pedido.getPlatos()) {
+                            if (plato.getPedido() == null) {
+                                plato.setPedido(this.pedido);
+                            }
+                            PlatosEnPedidoServicio platoPedServ = new PlatosEnPedidoServicio();
+                            platoPedServ.insertarPlatoEnPedido(plato);
+                        }
+                    }
+                }
+            }
+            Session.setPedido(this.pedido);
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
     
-    public void calcularPrecioTotal(){
+    public double calcularPrecioTotal(Pedido pedido) {
+        double sumatorio = 0.0;
         
-    }
-
-    public void ponPrecioConDescuento(String codigoDescuento) {
-
-        if (codigoDescuento.equals(descuento.getCodigo())) {
-            pedido.setPrecioConDescuento(pedido.getPrecioSinDescuento() - pedido.getPrecioSinDescuento() * descuento.getPorcentaje());
-            pedido.setDescuento(descuento);
-        } else {
-            pedido.setPrecioSinDescuento(pedido.getPrecioSinDescuento());
+        for (PlatoEnPedido plato : pedido.getPlatos()) {
+            sumatorio += plato.getPrecioPlatos();
         }
-
+        
+        pedido.setPrecioSinDescuento(sumatorio);
+        return sumatorio;
     }
-
-    @Override
-    public String toString() {
-        return "PedidoServicio{" + "pedido=" + pedido + ", descuento=" + descuento + '}';
-    }
-
-    public PedidoServicio(Pedido pedido, Descuento descuento) {
-        this.pedido = pedido;
-        this.descuento = descuento;
-    }
-
-    public Pedido getPedido() {
+    
+    public Pedido ponPrecioConDescuento(String codigoDescuento) {
+        DescuentoServicio descuentoServicio = new DescuentoServicio();
+        this.descuento = descuentoServicio.getDescuentoByCodigo(codigoDescuento);
+        
+        pedido.setPrecioConDescuento(pedido.getPrecioSinDescuento() - pedido.getPrecioSinDescuento() * (((double) descuento.getPorcentaje()) / 100));
+        pedido.setDescuento(descuento);
         return pedido;
     }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    
+    public ArrayList<PlatoEnPedido> getPlatosEnPedido() {
+        return platosEnPedido;
     }
-
-    public Descuento getDescuento() {
-        return descuento;
+    
+    public void setPlatosEnPedido(ArrayList<PlatoEnPedido> platosEnPedido) {
+        this.platosEnPedido = platosEnPedido;
     }
-
-    public void setDescuento(Descuento descuento) {
-        this.descuento = descuento;
+    
+    public void insertPlatosEnPedido() {
+        PlatosEnPedidoServicio platoPedServ = new PlatosEnPedidoServicio();
+        
+        for (PlatoEnPedido plato : this.platosEnPedido) {
+            plato.setPedido(this.pedido);
+            
+            platoPedServ.insertarPlatoEnPedido(plato);
+        }
+    }
+    
+    public Pedido actualizaDireccionPedido(Pedido pedido) {
+        if (pedido.getDireccion() != null) {
+            PreparedStatement stm;
+            try {
+                String sql = "UPDATE PEDIDO SET ID_DIRECCION = ? WHERE ID = " + pedido.getId();
+                stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                stm.setInt(1, pedido.getDireccion().getId());
+                
+                int affectedRows = stm.executeUpdate();
+                if (affectedRows >= 1) {
+                    return pedido;
+                }
+            } catch (SQLException ex) {
+                System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
+            }
+        }
+        return pedido;
     }
 }

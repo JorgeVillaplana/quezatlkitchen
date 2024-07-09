@@ -39,10 +39,12 @@ public class DireccionServicio {
     public Direccion getDireccionById(int id) {
         direccion = new Direccion();
 
-        Statement stm;
+        PreparedStatement stm;
         try {
-            stm = ConnectDB.con.createStatement();
-            ResultSet result = stm.executeQuery("SELECT * FROM DIRECCION WHERE ID = " + id);
+            String sql = "SELECT * FROM DIRECCION WHERE ID = ?";
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setInt( 1, id);
+            ResultSet result = stm.executeQuery();
 
             while (result.next()) {
 
@@ -54,7 +56,9 @@ public class DireccionServicio {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
 
 
@@ -64,26 +68,24 @@ public class DireccionServicio {
     public Direccion setNuevaDireccion(Direccion direccion) {
         PreparedStatement stm;
         try {
-            String[] camposDireccion = {"LOCALIDAD", "CP", "CALLE_NUM_PISO"};
+            String sql = "INSERT INTO DIRECCION (LOCALIDAD, CP, CALLE_NUM_PISO) VALUES (?,?,?)";
 
-            stm = ConnectDB.con.prepareStatement("INSERT INTO DIRECCION", camposDireccion);
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            stm.setString(0, direccion.getLocalidad());
-            stm.setInt(1, direccion.getCodigoPostal());
-            stm.setString(2, direccion.getCallePortalPiso());
+            stm.setString(1, direccion.getLocalidad());
+            stm.setInt(2, direccion.getCodigoPostal());
+            stm.setString(3, direccion.getCallePortalPiso());
 
-            ResultSet result = stm.executeQuery();
+            int affectedRows = stm.executeUpdate();
+            if(affectedRows > 0){
+            ResultSet result = stm.getGeneratedKeys();
 
-            Direccion nuevaDirec = new Direccion();
+           while (result.next()) {
+                direccion.setId(result.getInt("insert_id"));
+                
+            }}
 
-            while (result.next()) {
-                nuevaDirec.setId(result.getInt("ID"));
-                nuevaDirec.setLocalidad(result.getString("LOCALIDAD"));
-                nuevaDirec.setCodigoPostal(result.getInt("CP"));
-                nuevaDirec.setCallePortalPiso(result.getString("CALLE_NUM_PISO"));
-            }
-
-            return nuevaDirec;
+            return direccion;
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());

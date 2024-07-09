@@ -7,6 +7,7 @@ package com.psi.quetzalkitchen.Servicios;
 import com.psi.quetzalkitchen.Connection.ConnectDB;
 import com.psi.quetzalkitchen.Modelos.Direccion;
 import com.psi.quetzalkitchen.Modelos.Usuario;
+import com.psi.quetzalkitchen.Session;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -67,7 +68,9 @@ public class UsuarioServicio {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
 
         return usuarios;
@@ -77,10 +80,12 @@ public class UsuarioServicio {
     public Usuario getUsuarioById(int id) {
         usuario = new Usuario();
 
-        Statement stm;
+        PreparedStatement stm;
         try {
-            stm = ConnectDB.con.createStatement();
-            ResultSet result = stm.executeQuery("SELECT * FROM USUARIO WHERE ID = " + id);
+            String sql = "SELECT * FROM USUARIO WHERE ID = ?";
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setInt(1, id);
+            ResultSet result = stm.executeQuery();
 
             while (result.next()) {
 
@@ -99,9 +104,11 @@ public class UsuarioServicio {
                 usuario.setDireccion(direccion);
 
             }
-
+            Session.setUsuario(usuario);
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
 
         return usuario;
@@ -138,9 +145,48 @@ public class UsuarioServicio {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioServicio.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+
+        return null;
+    }
+
+    public Usuario getUsuarioByEmailAndPass(Usuario usuario) {
+
+        PreparedStatement stm;
+        try {
+            String sql = "SELECT * FROM USUARIO WHERE EMAIL = ? AND PASS = ?";
+            stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            stm.setString(1, usuario.getEmail());
+            stm.setString(2, usuario.getPass());
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+
+                usuario.setId(result.getInt("ID"));
+                usuario.setDNI(result.getString("DNI"));
+                usuario.setNombre(result.getString("NOMBRE"));
+                usuario.setApellido1(result.getString("APELLIDO1"));
+                usuario.setApellido2(result.getString("APELLIDO2"));
+                usuario.setEdad(result.getInt("EDAD"));
+                usuario.setEmail(result.getString("EMAIL"));
+                usuario.setPass(result.getString("PASS"));
+                Direccion direccion = new Direccion();
+                direccion.setId(result.getInt("ID_DIRECCION"));
+                DireccionServicio direcServicio = new DireccionServicio();
+                direccion = direcServicio.getDireccionById(direccion.getId());
+                usuario.setDireccion(direccion);
+
+            }
+            Session.setUsuario(usuario);
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
         }
         
-        return null;
+        return usuario;
     }
 }
