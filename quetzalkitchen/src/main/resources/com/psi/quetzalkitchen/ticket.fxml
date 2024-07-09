@@ -7,9 +7,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="653.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psi.quetzalkitchen.TicketController">
    <children>
-      <TextArea fx:id="ticketInfo" editable="false" layoutY="40.0" prefHeight="528.0" prefWidth="815.0" />
+      <TextArea fx:id="ticketInfo" editable="false" layoutY="40.0" prefHeight="435.0" prefWidth="815.0" wrapText="true" />
       <Text layoutX="44.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ticket" wrappingWidth="274.39996337890625" />
-      <Button layoutX="217.0" layoutY="593.0" mnemonicParsing="false" onAction="#aceptar" prefHeight="38.0" prefWidth="165.0" text="Aceptar" />
-      <Button layoutX="452.0" layoutY="593.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="38.0" prefWidth="189.0" text="Cancelar" />
+      <Button layoutX="211.0" layoutY="523.0" mnemonicParsing="false" onAction="#aceptar" prefHeight="38.0" prefWidth="165.0" text="Aceptar" />
+      <Button layoutX="441.0" layoutY="523.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="38.0" prefWidth="189.0" text="Cancelar" />
    </children>
 </AnchorPane>
