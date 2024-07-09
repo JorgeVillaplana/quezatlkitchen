@@ -11,9 +11,9 @@ package com.psi.quetzalkitchen.Constants;
 public class UtilConstants {
     
     public static final String DB_USER = "root";
-    public static final String DB_PASS = "SeGu-16";
+    public static final String DB_PASS = "root";
     public static final String DB_NAME = "QUETZALKITCHEN";
-    public static final String DB_URL = "79.109.198.49";
+    public static final String DB_URL = "127.0.0.1";
     public static final int DB_PORT = 3306;
     
 }
