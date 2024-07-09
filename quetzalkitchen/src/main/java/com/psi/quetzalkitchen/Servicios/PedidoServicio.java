@@ -47,7 +47,7 @@ public class PedidoServicio {
                 
                 while (result.next()) {
                     
-                    this.pedido.setId(result.getInt("ID"));
+                    this.pedido.setId(result.getInt("INSERT_ID"));
                     if (!this.pedido.getPlatos().isEmpty()) {
                         for (PlatoEnPedido plato : this.pedido.getPlatos()) {
                             if (plato.getPedido() == null) {

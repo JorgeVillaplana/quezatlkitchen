@@ -40,16 +40,16 @@ public class PlatosEnPedidoServicio {
 
             stm = ConnectDB.con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, plato.getPlato().getId());
-            stm.setInt(1, plato.getCantidad());
-            stm.setDouble(2, calculaPrecio(plato.getPlato(), plato.getCantidad()));
-            stm.setInt(3, plato.getPedido() != null ?  (int) plato.getPedido().getId() : null);
+            stm.setInt(2, plato.getCantidad());
+            stm.setDouble(3, calculaPrecio(plato.getPlato(), plato.getCantidad()));
+            stm.setInt(4, plato.getPedido() != null ?  (int) plato.getPedido().getId() : null);
   
             int affectedRows = stm.executeUpdate();
 
             if (affectedRows > 0) {
                 ResultSet result = stm.getGeneratedKeys();
                 while(result.next()){
-                    plato.setId(result.getInt("ID"));
+                    plato.setId(result.getInt("INSERT_ID"));
                 }
                 
             }

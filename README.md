@@ -19,4 +19,5 @@ Proyecto para Programación de Sistemas Informáticos
 	- PuTTy (Para la comunicación SSH con el servidor donde se aloja la base de datos)
 	- Obsidian (Programa para tomar notas, para la elaboración de este documento) 
 		-Jorge: "En realidad la estoy probando, esta es la primera vez que la uso"
+	- HeidiSQL (Programa sencillo para la administración de la base de datos de forma más visual)
 	
