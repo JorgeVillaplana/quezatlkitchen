@@ -20,6 +20,7 @@ public class Pedido {
     private Date horaEstimada;
     private Direccion direccion;
     private Descuento descuento;
+    private Usuario usuario;
 
     public Pedido() {
     }
@@ -82,9 +83,27 @@ public class Pedido {
         this.descuento = descuento;
     }
 
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
     @Override
     public String toString() {
-        return "Pedido{" + "id=" + id + ", platos=" + platos + ", precioSinDescuento=" + precioSinDescuento + ", precioConDescuento=" + precioConDescuento + ", horaEstimada=" + horaEstimada + ", direccion=" + direccion + ", descuento=" + descuento + '}';
+        return "Pedido{" + "id=" + id + ", platos=" + platos + ", precioSinDescuento=" + precioSinDescuento + ", precioConDescuento=" + precioConDescuento + ", horaEstimada=" + horaEstimada + ", direccion=" + direccion + ", descuento=" + descuento + ", usuario=" + usuario + '}';
     }
+
+    
 
 }

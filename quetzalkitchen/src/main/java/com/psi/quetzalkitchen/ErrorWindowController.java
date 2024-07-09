@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -17,12 +18,16 @@ import javafx.fxml.Initializable;
  */
 public class ErrorWindowController implements Initializable {
 
+    @FXML
+    TextArea errorMsg;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        this.errorMsg.setText(Session.getMensajeError());
     }    
     
     @FXML

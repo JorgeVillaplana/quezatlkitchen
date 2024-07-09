@@ -5,13 +5,20 @@
 package com.psi.quetzalkitchen;
 
 import com.psi.quetzalkitchen.Modelos.Alergeno;
+import com.psi.quetzalkitchen.Modelos.Pedido;
 import com.psi.quetzalkitchen.Modelos.Plato;
+import com.psi.quetzalkitchen.Modelos.PlatoEnPedido;
+import com.psi.quetzalkitchen.Servicios.PedidoServicio;
 import com.psi.quetzalkitchen.Servicios.PlatoServicio;
+import com.psi.quetzalkitchen.Servicios.PlatosEnPedidoServicio;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -31,6 +38,8 @@ public class CatalogueController implements Initializable {
     private PlatoServicio platoServicio = new PlatoServicio();
     @FXML
     private ScrollPane catalogo;
+    @FXML
+    private HBox grande;
 
     /**
      * Initializes the controller class.
@@ -40,7 +49,7 @@ public class CatalogueController implements Initializable {
 
         obtenerPlatosDeBD(); //Obtenemos los platos de la BD
         int counter = 0;
-        HBox grande = new HBox();
+
         for (Plato plato : platos) {
             HBox hbox = creaCampo(plato, String.valueOf(plato.getId()));
             hbox.setId(String.valueOf(plato.getId()));
@@ -62,6 +71,7 @@ public class CatalogueController implements Initializable {
         TextField paraCantidad = creaCampoCantidad("cantidad" + id);
 
         contenedor.getChildren().addAll(paraPlato, paraCantidad);
+        contenedor.setId(id);
         return contenedor;
     }
 
@@ -92,6 +102,13 @@ public class CatalogueController implements Initializable {
         TextField campoCantidad = new TextField();
         campoCantidad.setId(id);
         campoCantidad.setText("0");
+        campoCantidad.setOnAction(event -> {
+            String texto = campoCantidad.getText();
+            if (texto.matches("\\d+") && Integer.parseInt(texto) > 0) {
+            } else {
+                campoCantidad.setText("0");
+            }
+        });
         return campoCantidad;
     }
 
@@ -110,9 +127,53 @@ public class CatalogueController implements Initializable {
             return 0;
         }
     }
-    
+
     @FXML
-    public void recogePedido(){
-        
+    public void recogePedido() throws IOException {
+        List<Node> hijos = grande.getChildren();
+        PlatosEnPedidoServicio ps = new PlatosEnPedidoServicio();
+        PedidoServicio pedS = new PedidoServicio();
+        ArrayList<PlatoEnPedido> platosPedidos = new ArrayList();
+
+        for (Node hijo : hijos) {
+            PlatoEnPedido nuevoPlato = new PlatoEnPedido();
+
+            HBox contenedor = (HBox) hijo;
+            for (Plato plato : platos) {
+                if (contenedor.getId().equals(String.valueOf(plato.getId()))) {
+                    nuevoPlato.setPlato(plato);
+                }
+            }
+            List<Node> elementos = contenedor.getChildren();
+            for (Node elemento : elementos) {
+                if (elemento instanceof TextField) {
+
+                    int cantidad = (Integer.parseInt((((TextField) elemento).getText())));
+
+                    if (cantidad > 0) {
+                        nuevoPlato.setCantidad(cantidad);
+                        nuevoPlato.setPrecioPlatos(ps.calculaPrecio(nuevoPlato.getPlato(), cantidad));
+                        platosPedidos.add(nuevoPlato);
+                    }
+                }
+            }
+        }
+
+        Pedido pedido = new Pedido();
+        pedido.setPlatos(platosPedidos);
+        pedido.setPrecioSinDescuento(pedS.calcularPrecioTotal(pedido));
+        Session.setPedido(pedido);
+
+        App.setRoot("deliveryConfirm");
+    }
+
+    @FXML
+    public void cancelar() throws IOException {
+        App.setRoot("catalogue");
+    }
+
+    @FXML
+    public void showLogin() throws IOException {
+        App.setRoot("login");
     }
 }

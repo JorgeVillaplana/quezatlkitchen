@@ -7,28 +7,27 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="541.0" prefWidth="806.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="com.psi.quetzalkitchen.DeliveryConfirmController">
+<AnchorPane id="AnchorPane" prefHeight="541.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.psi.quetzalkitchen.DeliveryConfirmController">
    <children>
       <Pane prefHeight="364.0" prefWidth="806.0">
          <children>
             <Text layoutX="61.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pedido:" />
-            <TextArea editable="false" layoutY="44.0" prefHeight="321.0" prefWidth="806.0" />
+            <TextArea fx:id="muestraInfo" editable="false" layoutY="44.0" prefHeight="321.0" prefWidth="806.0" wrapText="true" />
          </children>
       </Pane>
-      <Pane layoutY="341.0" prefHeight="200.0" prefWidth="806.0">
+      <Pane layoutY="364.0" prefHeight="205.0" prefWidth="806.0">
          <children>
-            <Text layoutX="52.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direccion" />
-            <TextField fx:id="Direccion" layoutX="112.0" layoutY="125.0" prefHeight="25.0" prefWidth="184.0" promptText="Introduce la direccion del envio" />
-            <TextField fx:id="CP" layoutX="554.0" layoutY="40.0" prefHeight="26.0" prefWidth="222.0" promptText="Introduce tu codigo postal" />
-            <TextField fx:id="Localidad" layoutX="126.0" layoutY="40.0" prefHeight="26.0" prefWidth="165.0" promptText="Introduce tu Localidad" />
             <Text layoutX="49.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Localidad" />
-            <Text layoutX="470.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo Postal" />
-            <Button layoutX="470.0" layoutY="133.0" mnemonicParsing="false" text="Enviar" />
-            <Button layoutX="577.0" layoutY="133.0" mnemonicParsing="false" text="Cancelar" />
-            <Text layoutX="463.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduce tu codigo de descuento:" wrappingWidth="169.33673095703125" />
-            <TextField fx:id="CDESC" layoutX="608.0" layoutY="88.0" prefHeight="34.0" prefWidth="132.0" promptText="Codigo de descuento" />
-            <Button layoutX="674.0" layoutY="134.0" mnemonicParsing="false" text="Cambiar pedido" />
+            <TextField fx:id="localidad" layoutX="126.0" layoutY="40.0" prefHeight="26.0" prefWidth="184.0" promptText="Introduce tu Localidad" />
+            <Text layoutX="448.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo Postal" />
+            <TextField fx:id="cp" layoutX="554.0" layoutY="40.0" prefHeight="26.0" prefWidth="184.0" promptText="Introduce tu codigo postal" />
+            <Text layoutX="49.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Direccion" />
+            <TextField fx:id="direccion" layoutX="126.0" layoutY="93.0" prefHeight="25.0" prefWidth="184.0" promptText="Introduce la direccion del envio" />
+            <Text layoutX="448.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Código descuento" wrappingWidth="117.33673095703125" />
+            <TextField fx:id="cDesc" layoutX="554.0" layoutY="93.0" prefHeight="25.0" prefWidth="184.0" promptText="Codigo de descuento" />
+            <Button layoutX="168.0" layoutY="146.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="101.0" text="Cambiar pedido" />
+            <Button layoutX="379.0" layoutY="146.0" mnemonicParsing="false" onAction="#send" prefHeight="25.0" prefWidth="48.0" text="Enviar" />
+            <Button layoutX="554.0" layoutY="146.0" mnemonicParsing="false" onAction="#cancel" text="Cancelar" />
          </children>
       </Pane>
    </children>

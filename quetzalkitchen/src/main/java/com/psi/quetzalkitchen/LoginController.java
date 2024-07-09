@@ -5,8 +5,10 @@
 package com.psi.quetzalkitchen;
 
 import com.psi.quetzalkitchen.Modelos.Usuario;
+import com.psi.quetzalkitchen.Servicios.UsuarioServicio;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +21,7 @@ import javafx.scene.control.TextField;
  * @author Mañanas
  */
 public class LoginController implements Initializable {
-    
+
     @FXML
     TextField userMail;
     @FXML
@@ -32,23 +34,30 @@ public class LoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     @FXML
-    public void confirm(ActionEvent event){
-        String userMail = this.userMail.getText();
-        String userPass = this.userPass.getText();
-        Usuario user = new Usuario();
-        user.setEmail(userMail);
-        user.setPass(userPass);
+    public void confirm(ActionEvent event) throws IOException {
+        Usuario usuario = new Usuario();
+
+        usuario.setEmail(this.userMail.getText());
+        usuario.setPass(this.userPass.getText());
+        UsuarioServicio userServ = new UsuarioServicio();
+        usuario = userServ.getUsuarioByEmailAndPass(usuario);
+        if(usuario.getNombre().isEmpty() || usuario.getNombre() == null){
+            Session.setMensajeError("El usuario no está registrado");
+            App.setRoot("errorWindow");
+        }else{
+            App.setRoot("catalogue");
+        }
     }
-    
+
     @FXML
-    public void switchToRegistry(ActionEvent event) throws IOException{
+    public void switchToRegistry(ActionEvent event) throws IOException {
         App.setRoot("register");
     }
-    
+
     @FXML
-    public void deleteAll(ActionEvent event){
+    public void deleteAll(ActionEvent event) {
         this.userMail.setText("");
         this.userPass.setText("");
     }

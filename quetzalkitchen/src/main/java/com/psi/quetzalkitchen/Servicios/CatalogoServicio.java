@@ -6,6 +6,7 @@ package com.psi.quetzalkitchen.Servicios;
 
 import com.psi.quetzalkitchen.Modelos.Plato;
 import com.psi.quetzalkitchen.Modelos.PlatoEnPedido;
+import com.psi.quetzalkitchen.Session;
 import java.util.ArrayList;
 
 /**
@@ -21,9 +22,10 @@ public class CatalogoServicio {
     }
 
     public ArrayList<Plato> getAllPlatos() {
-        /**
-         * TODO: Obtener platos de la BBDD.
-         */
+        
+        PlatoServicio platoServ = new PlatoServicio();
+        this.platos = platoServ.getAllPlatos();
+        
         return this.platos;
     }
 
@@ -32,13 +34,15 @@ public class CatalogoServicio {
 
         if (platos.size() == cantidades.size()) {
             for (int i = 0; i < platos.size(); i++) {
-                platosEnPedido.add(platPedSer.calculaPrecio(platos.get(i), cantidades.get(i)));
+                PlatoEnPedido plato= new PlatoEnPedido();
+                plato.setPlato(platos.get(i));
+                plato.setCantidad(cantidades.get(i));
+                plato.setPrecioPlatos(platPedSer.calculaPrecio(platos.get(i), cantidades.get(i)));
+                platosEnPedido.add( plato );
             }
         }
         
-        /**
-         * TODO: Mandar a base de datos platosEnPedido, creando primero el pedido.
-         */
+       Session.getPedido().setPlatos(platosEnPedido);
     }
 
     public ArrayList<Plato> getPlatos() {

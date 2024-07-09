@@ -41,10 +41,6 @@ public class Plato {
         return id;
     }
 
-    public void setid(int id) {
-        this.id = id;
-    }
-
     public double getPrecioUnitario() {
         return precioUnitario;
     }
@@ -67,6 +63,10 @@ public class Plato {
 
     public void setAlergenos(ArrayList<Alergeno> alergenos) {
         this.alergenos = alergenos;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
